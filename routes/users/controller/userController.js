@@ -2,6 +2,9 @@
 //in human term - a template to create a user
 const User = require("../model/User");
 //exporting an object with key and value
+const bcrypt = require("bcryptjs");
+const salt = bcrypt.genSaltSync(10);
+const hash = bcrypt.hashSync("b4c0/\/", salt);
 
 module.exports = {
   getAllUsers: function (callback) {
@@ -20,7 +23,7 @@ module.exports = {
     let createdUser = new User({
       firstName: body.firstName,
       lastName: body.lastName,
-      password: body.password,
+      password: hash,
       email: body.email,
       username: body.username,
     });
