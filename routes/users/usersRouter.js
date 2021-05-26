@@ -10,44 +10,35 @@ router.get("/", function (req, res, next) {
   });
 });
 
-router.get("/get-all-users", function (req, res) {
-  getAllUsers()
-    .then(payload => {
-      res.json({message: "success", data: payload})
-    })
-    .catch(error => {
-      res.status(500).json({message: "Error", error})
-    })
+router.get("/get-all-users",  async function (req, res) {
+  try{
+    let foundAllUsers = await getAllUsers();
+    res.json({ message: "success", foundAllUsers})
+  } catch (error) {
+    res.status(500).json({message: "Error", error});
+  }
 });
 
-router.post("/create-user", function (req, res) {
-  createUser(req.body)
-    .then((payload) => {
-      res.json({ message: "success", data: payload });
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "error", error });
-    });
+router.post("/create-user", async function (req, res) {
+
+  try{
+    let createdUser = await createUser(req.body);
+
+    res.json({message: "Success", createdUser})
+  } catch (error) {
+    res.json({message: "failure", error: error.message })
+  }
+
+
+
 });
 
 router.put('/update-user-by-id/:id', function(req, res) {
-  updateUserByID(req.params.id, req.body, { new: true })
-  .then((payload) => {
-    res.json({ message: "success", data: payload });
-  })
-  .catch((error) => {
-    res.status(500).json({ message: "error", error });
-  });
+  
 });
 
 router.delete("/delete-user-by-id/:id", function (req, res) {
-  deleteUserByID(req.params.id)
-    .then((payload) => {
-      res.json({message: "Success", data: payload});
-    })
-    .catch(error => {
-      res.status(500).json({message: "error", error});
-    })
+  
 });
 
 module.exports = router;
