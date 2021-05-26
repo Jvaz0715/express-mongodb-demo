@@ -52,14 +52,6 @@ module.exports = {
   },
   updateUserByID: function (id, body){
     return new Promise((resolve, reject) =>{
-      User.find({})
-      .then(payload => {
-        resolve(payload);
-      })
-      .catch((error) => {
-        reject(error);
-      })
-
       User.findByIdAndUpdate({_id: id }, body, { new: true })
         .then(updatedPayload => {
           resolve(updatedPayload);
@@ -68,7 +60,16 @@ module.exports = {
           reject(error);
         })
     })
-
   },
-  deleteUserByID: function(id) {},
+  deleteUserByID: function(id) {
+    return new Promise((resolve, reject) => {
+      User.findByIdAndRemove({_id: id})
+        .then(deletedPayload => {
+          resolve(deletedPayload);
+        })
+        .catch((error) => {
+          reject(error);
+        })
+    })
+  },
 };
