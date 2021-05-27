@@ -15,20 +15,21 @@ async function getAllUsers(req, res) {
 };
 
 async function createUser(req, res) {
+  const { password, firstName, lastName, email, username } = req.body;
 
   try{
     let createdSalt = await bcrypt.genSalt(10);
     let hashedPassword = await bcrypt.hash(req.body.password, createdSalt);
 
-    let savedUser = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+    let newUser = new User({
+      firstName,
+      lastName,
       password: hashedPassword,
-      email: req.body.email,
-      username: req.body.username,
+      email,
+      username,
     });
 
-    let createdUser = await savedUser.save();
+    let createdUser = await newUser.save();
     res.json({message: "Success", createdUser})
    
   } catch (e) {
