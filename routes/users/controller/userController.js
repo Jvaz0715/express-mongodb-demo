@@ -35,21 +35,31 @@ async function createUser(body) {
   }
 };
 
-
+// update user by id takes two parameters : 
+//    the user id and 
+//    the body from the put request
+// we don't need a callback anymore *avoids "callback hell"*
 async function updateUserByID(id, body) {
   try{
+    //declare a variable that holds the await
+    //findByIdAndUpdate takes three parameters:
+      // {_id:id} that when used will be the req.params.id
+      // body that when used will be the req.body
+      // and a true boolean
     let updatedUser = await User.findByIdAndUpdate({_id:id}, body, {new: true});
-
-    return await updatedUser;
+    // after updatedUser is complete we return the updatedUser
+    return updatedUser;
 
   } catch (error) {
+    // if there is an error at any point, the the catch error is a "catch all" and will return error
     return error;
   }
 }
+
 async function deleteUserByID(id) {
   try {
     let deletedUser = await User.findByIdAndRemove({_id:id});
-      return await deletedUser;
+      return deletedUser;
   } catch (error) {
     return error;
   }

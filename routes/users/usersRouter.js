@@ -36,14 +36,17 @@ router.post("/create-user", async function (req, res) {
 
 
 //update a user by id
+// WE HAVE to do async before the function
 router.put('/update-user-by-id/:id', async function(req, res) {
-  
+  // like in controller we declare updatedUser, now with the actual parameters of req.
   try{
     let updatedUser = await updateUserByID(req.params.id, req.body);
-
+    // if successful, we will see the updatedUser
+    // we can do another get request of all users and see the update as well
     res.json({message: "Success", updatedUser});
 
   } catch (error) {
+    // if our put request is not successful at any point; we return message failure and error message
     res.json({message: "failure", error: error.message });
   }
 });
