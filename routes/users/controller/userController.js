@@ -41,14 +41,21 @@ async function createUser(body) {
 async function updateUserByID(id, body) {
   try{
     let updatedUser = await User.findByIdAndUpdate({_id:id}, body, {new: true});
-    
+
     return await updatedUser;
 
   } catch (error) {
     return error;
   }
 }
-async function deleteUserByID() {}
+async function deleteUserByID(id) {
+  try {
+    let deletedUser = await User.findByIdAndRemove({_id:id});
+      return await deletedUser;
+  } catch (error) {
+    return error;
+  }
+}
 
 
 module.exports = {

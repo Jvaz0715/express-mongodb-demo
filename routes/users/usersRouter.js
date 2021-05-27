@@ -45,8 +45,17 @@ router.put('/update-user-by-id/:id', async function(req, res) {
   }
 });
 
-router.delete("/delete-user-by-id/:id", function (req, res) {
-  
+router.delete("/delete-user-by-id/:id", async function (req, res) {
+
+  try{
+    let deletedUser = await deleteUserByID(req.params.id);
+
+    res.json({message: "Success", deletedUser});
+
+  } catch (error) {
+    res.json({message: "failure", error: error.message });    
+  }
+
 });
 
 module.exports = router;
