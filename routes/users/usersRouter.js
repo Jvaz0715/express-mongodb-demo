@@ -20,6 +20,6 @@ router.post("/create-user", createUser);
 router.put('/update-user-by-id/:id', updateUserByID);
 
 //delete user by id
-router.delete("/delete-user-by-id/:id", async function (req, res) {});
+router.delete("/delete-user-by-id/:id", deleteUserByID);
 
 module.exports = router;

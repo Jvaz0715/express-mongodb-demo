@@ -49,7 +49,15 @@ async function updateUserByID(req, res) {
   };
 };
 
-async function deleteUserByID() {};
+async function deleteUserByID(req, res) {
+  try{
+    let deletedUser = await User.findByIdAndRemove(req.params.id);
+
+    res.json({message: "Success", deletedUser});
+  } catch (e) {
+    res.status(500).json({message: "failure", error: e.message })
+  }
+};
 
 
 module.exports = {
