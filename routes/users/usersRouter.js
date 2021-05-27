@@ -33,8 +33,16 @@ router.post("/create-user", async function (req, res) {
 
 });
 
-router.put('/update-user-by-id/:id', function(req, res) {
+router.put('/update-user-by-id/:id', async function(req, res) {
   
+  try{
+    let updatedUser = await updateUserByID(req.params.id, req.body);
+
+    res.json({message: "Success", updatedUser});
+
+  } catch (error) {
+    res.json({message: "failure", error: error.message });
+  }
 });
 
 router.delete("/delete-user-by-id/:id", function (req, res) {

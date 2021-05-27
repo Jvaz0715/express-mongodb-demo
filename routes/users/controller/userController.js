@@ -38,7 +38,16 @@ async function createUser(body) {
 };
 
 
-async function updateUserByID() {}
+async function updateUserByID(id, body) {
+  try{
+    let updatedUser = await User.findByIdAndUpdate({_id:id}, body, {new: true});
+    
+    return await updatedUser;
+
+  } catch (error) {
+    return error;
+  }
+}
 async function deleteUserByID() {}
 
 
