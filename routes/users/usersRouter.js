@@ -10,6 +10,8 @@ router.get("/", function (req, res, next) {
   });
 });
 
+
+// get all users
 router.get("/get-all-users",  async function (req, res) {
   try{
     let foundAllUsers = await getAllUsers();
@@ -19,6 +21,7 @@ router.get("/get-all-users",  async function (req, res) {
   }
 });
 
+// create a user
 router.post("/create-user", async function (req, res) {
 
   try{
@@ -29,10 +32,10 @@ router.post("/create-user", async function (req, res) {
     res.json({message: "failure", error: error.message })
   }
 
-
-
 });
 
+
+//update a user by id
 router.put('/update-user-by-id/:id', async function(req, res) {
   
   try{
@@ -45,6 +48,8 @@ router.put('/update-user-by-id/:id', async function(req, res) {
   }
 });
 
+
+//delete user by id
 router.delete("/delete-user-by-id/:id", async function (req, res) {
 
   try{

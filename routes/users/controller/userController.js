@@ -1,5 +1,3 @@
-//User is coming from mongoDB Schema
-//in human term - a template to create a user
 const User = require("../model/User");
 //exporting an object with key and value
 
