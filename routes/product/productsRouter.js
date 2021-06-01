@@ -16,7 +16,13 @@ router.get("/get-all-products", function (req, res){
 
 // get product by id
 router.get("/get-product-by-id/:id", function (req, res) {
-
+    productController.getProductByID(function (err, payload) {
+        if (err) {
+            res.status(500).json({message: "Error", error: err });
+        } else {
+            res.json({ message: "success", data: payload})
+        }
+    });
 });
 
 // post new product
@@ -51,16 +57,11 @@ router.put("/update-product-by-id/:id", function (req, res){
 router.delete("/delete-product-by-id/:id", function (req, res) {
     productController.deleteProductByID(req.params.id, function(err, deletedPayload) {
         if (err) {
-            res.status(500).json({ message: "Error",
-                error: err
-            })
+            res.status(500).json({ message: "Error", error: err, });
         } else {
-            res.json({
-                message: "Success",
-                data: deletedPayload
-            })
+            res.json({ message: "Success", data: deletedPayload });
         }
-    })
+    });
 });
 
 
