@@ -58,12 +58,12 @@ module.exports = {
         )
     },
     deleteProductByID: function (id, callback) {
-        Product.findByIdAndRemove({_id: id}), function (err, deletedPayload) {
+        Product.findByIdAndRemove({ _id: id }, function (err, deletedPayload) {
             if (err) {
                 callback(err, null);
             } else {
                 callback(null, deletedPayload);
             }
-        }
+        });
     },
 };
